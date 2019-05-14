@@ -1,0 +1,52 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head :: header(~{::title},~{},~{})">
+    <title>首页</title>
+</head>
+<body>
+	<div id="main" style="width: 600px;height:400px;"></div>
+    <script th:inline="javascript">
+    	var tjMap=[[${tjMap}]];
+    	//alert(JSON.stringify(tjMap));
+    	
+        // 绘制图表。
+        echarts.init($("#main")[0]).setOption({
+            series: {
+                type: 'pie',
+                data: [               
+                    {name: '123', value: tjMap["emai:l123"]},
+                    {name: 'sohu', value: tjMap["emai:sohu"]},
+                    {name: 'qq', value: tjMap["emai:qq"]},
+                    {name: 'yahoo', value: tjMap["emai:yahoo"]},
+                    {name: '0355', value: tjMap["emai:0355"]},
+                    {name: 'hotmail', value: tjMap["emai:hotmail"]},
+                    {name: '163', value: tjMap["emai:163"]},
+                    {name: 'yeah', value: tjMap["emai:yeah"]},
+                    {name: 'live', value: tjMap["emai:live"]},
+                    {name: 'gmail', value: tjMap["emai:gmail"]},
+                    {name: '3721', value: tjMap["emai:3721"]},
+                    {name: 'sina', value: tjMap["emai:sina"]},
+                    {name: 'msn', value: tjMap["emai:msn"]},
+                    {name: 'other', value: tjMap["other"]}
+                ]
+            }
+        });
+        
+        
+    </script>
+    	<div th:if="${not #lists.isEmpty(accountList)}">
+		<div >
+			<div>
+				<h3>列表</h3>
+			</div>
+			<div>
+				<ul>
+					<li th:each="account:${accountList}">
+						
+						<span th:text="${account.email}"></span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

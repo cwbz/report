@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head :: header(~{::title},~{},~{})">
+    <title>首页</title>
+</head>
+<body>
+	<div id="main" style="width: 600px;height:400px;"></div>
+    <script th:inline="javascript">
+    	var tjMap=eval('(' + [[${tjMap}]] + ')');   
+        // 绘制图表。
+        echarts.init($("#main")[0]).setOption({
+            series: {
+                type: 'pie',
+                data:tjMap
+            }
+        });
+        
+        
+    </script>
+    	<div th:if="${not #lists.isEmpty(accountList)}">
+		<div >
+			<div>
+				<h3>列表</h3>
+			</div>
+			<div>
+				<ul>
+					<li th:each="account:${accountList}">
+						
+						<span th:text="${account.email}"></span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
